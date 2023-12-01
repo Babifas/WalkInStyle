@@ -1,0 +1,22 @@
+
+.login-main{
+    display: flex;
+    justify-content: center;
+    margin-top: 80px ;
+    margin-bottom: 100px ;
+    width: 100%;
+    text-align: start;
+    height: 100%;
+}
+.login-form{
+  padding:50px; 
+  border-radius: 10px;
+margin: 10px;
+  background-color:rgb(245,245,220);
+}
+.signup-form{
+  padding:30px 50px 10px 50px; 
+  border-radius: 10px;
+  margin: 10px;
+  background-color:rgb(245,245,220);
+}
