@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Babifas/WalkInStyle/static/css/main.9100af97.css",
-    "main.js": "/Babifas/WalkInStyle/static/js/main.f2ded7f9.js",
+    "main.js": "/Babifas/WalkInStyle/static/js/main.c3f6bebb.js",
     "static/js/787.e4452ded.chunk.js": "/Babifas/WalkInStyle/static/js/787.e4452ded.chunk.js",
     "static/media/homee.jpg": "/Babifas/WalkInStyle/static/media/homee.525f946427c559fc38ab.jpg",
     "static/media/Home3.jpg": "/Babifas/WalkInStyle/static/media/Home3.01c96ec42aad91316591.jpg",
@@ -10,11 +10,11 @@
     "static/media/SHOE LOGO.png": "/Babifas/WalkInStyle/static/media/SHOE LOGO.cc22c3c31dc4e325561d.png",
     "index.html": "/Babifas/WalkInStyle/index.html",
     "main.9100af97.css.map": "/Babifas/WalkInStyle/static/css/main.9100af97.css.map",
-    "main.f2ded7f9.js.map": "/Babifas/WalkInStyle/static/js/main.f2ded7f9.js.map",
+    "main.c3f6bebb.js.map": "/Babifas/WalkInStyle/static/js/main.c3f6bebb.js.map",
     "787.e4452ded.chunk.js.map": "/Babifas/WalkInStyle/static/js/787.e4452ded.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9100af97.css",
-    "static/js/main.f2ded7f9.js"
+    "static/js/main.c3f6bebb.js"
   ]
 }
