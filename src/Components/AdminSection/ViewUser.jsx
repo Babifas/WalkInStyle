@@ -1,21 +1,54 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image';
 import Table from 'react-bootstrap/Table';
 import { myContext } from '../../App';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 const ViewUser = () => {
-  const { signupData, adminloged } = useContext(myContext);
+  const {token, signupData, adminloged } = useContext(myContext);
+
+  const [user,setUser]=useState({});
   const { id } = useParams();
 
-  const findUser = signupData.find((data) => data.id === parseInt(id));
-  console.log(findUser);
-  let orderedItems;
-  if (findUser.purchasedProduct) {
-    orderedItems = findUser.purchasedProduct;
-  } else {
-    orderedItems = [];
+  const findUser=async ()=>{
+    try{
+      const res=await axios.get(`https://localhost:7281/api/User/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }});
+       setUser(res.data);
+       console.log(res.data);
+    }
+    catch(err){
+      console.log(err);
+    }
   }
+  const Orders=async ()=>{
+    try{
+      const res=await axios.get(`https://localhost:7281/api/Order`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }});
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+  useEffect(()=>{
+    findUser();
+  },[token])
+  // const findUser = signupData.find((data) => data.id === parseInt(id));
+  // console.log(findUser);
+  // let orderedItems;
+  // if (findUser.purchasedProduct) {
+  //   orderedItems = findUser.purchasedProduct;
+  // } else {
+  //   orderedItems = [];
+  // }
 
   return (
     <>
@@ -24,8 +57,8 @@ const ViewUser = () => {
         {
           <div className='d-flex flex-column align-items-center bg-white mt-5'>
             <Image src={require('../Images/users.png')} roundedCircle className='bg-secondary my-3 p-3' style={{ maxWidth: '150px' }} />
-            <h5>{findUser.email}</h5>
-            <p>ID:{findUser.id}</p>
+            <h5>{user.userEmail }</h5>
+            <p>ID:{user.userId}</p>
 
           </div>
 
@@ -33,7 +66,7 @@ const ViewUser = () => {
 
         <h1 style={{ backgroundColor: 'yellowgreen' }}>ORDER LIST</h1>
         <div className='table-responsive'>
-          <Table striped bordered hover>
+          {/* <Table striped bordered hover>
             <thead>
               <tr>
                 <th>ID</th>
@@ -55,7 +88,7 @@ const ViewUser = () => {
               </tbody>
             ))}
 
-          </Table>
+          </Table> */}
         </div>
       </Container> : <h1 style={{ color: 'yellowgreen', marginTop: '50px' }}>ACCESS DENIED !!!</h1>
       }

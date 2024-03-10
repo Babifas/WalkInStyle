@@ -3,7 +3,7 @@ import { Route, Routes} from 'react-router-dom';
 import './App.css';
 import Login from './Components/Authorization/Login';
 import Signup from './Components/Authorization/Signup';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import Home from './Components/Home/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarMain from './Components/Navbar/NavbarMain';
@@ -21,6 +21,8 @@ import UserSection from './Components/AdminSection/UserSection';
 import AddProduct from './Components/AdminSection/AddProduct';
 import UpdateProduct from './Components/AdminSection/UpdateProduct';
 import ViewUser from './Components/AdminSection/ViewUser';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 
 
@@ -29,18 +31,32 @@ function App() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [signupData, setSignupdata] = useState([{ email: 'admin@gmail.com', password: "963963963", id: 1, previlage: 'Admin' }, { email: 'babi@gmail.com', password: "753753753", id: 2, previlage: 'Admin' }, { email: 'jonh@gmail.com', password: "753753753", id: 3, previlage: 'User' }, { email: 'ramesh@gmail.com', password: "753753753", id: 4, previlage: 'User' }]);
   const [products, setProducts] = useState(Product);
   const [carts, setCarts] = useState([]);
   const [login, setLogin] = useState(false);
-  const [logindata, setLogindata] = useState('');
   const [searchitem, setSearchitem] = useState('');
   const [totalPrice, setTotalprice] = useState(0);
-  const [logemail, setLogemail] = useState('');
   const [adminloged, setAdminloged] = useState(false)
+
+  const [token,setToken]=useState('hi');
+
+  useEffect(()=>{
+    var token=Cookies.get('accessToken');
+    if(token){
+      const decodeToken=jwtDecode(token);
+      const role=decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+      console.log(role);
+
+      if(role==='Admin'){
+        setAdminloged(true);
+      }
+      setToken(token)
+      setLogin(true)
+    }
+  },[])
   return (
     <div className="App">
-      <myContext.Provider value={{ email, setEmail, password, setPassword, signupData, setSignupdata, products, setProducts, carts, setCarts, login, setLogin, logindata, setLogindata, searchitem, setSearchitem, totalPrice, setTotalprice, logemail, setLogemail, adminloged, setAdminloged }}>
+      <myContext.Provider value={{token,setToken, email, setEmail, password, setPassword,  products, setProducts, carts, setCarts, login, setLogin,searchitem, setSearchitem, totalPrice, setTotalprice,  adminloged, setAdminloged }}>
         <NavbarMain />
         <Routes>
           <Route path='/login' element={<Login />} />

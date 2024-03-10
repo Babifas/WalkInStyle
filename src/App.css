@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   font-family: "SoDo Sans SemiBold";
+  
  
 }
 .product-details{
@@ -12,7 +13,7 @@
   pointer-events: none;
 }
 .cream{
-  background-color:beige;
+  background-color:rgb(171, 171, 95);
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

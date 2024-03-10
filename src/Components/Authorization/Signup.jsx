@@ -1,12 +1,15 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { myContext } from '../../App'
 import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 
 const Signup = () => {
-  const { email, setEmail, password, setPassword, signupData, setSignupdata } = useContext(myContext);
+  const { email, setEmail, password, setPassword } = useContext(myContext);
   const [repassword, setRepassword] = useState('');
+  const [username,setUsername]=useState('');
+
   const navigate = useNavigate();
 
   const [emailValid, setEmailvalid] = useState(true);
@@ -18,19 +21,29 @@ const Signup = () => {
   const passwordHandle = (e) => {
     setPassword(e)
   }
+  const usernameHandle=(e)=>{
+    setUsername(e);
+  }
+ 
+  const  signupHandle = async () => {
+    // const emailChecking = signupData.find((data) => data.email === email);  && !emailChecking
 
+    if (emailValid && password === repassword && password.length >= 8 ) {
 
-  const signupHandle = () => {
-    const emailChecking = signupData.find((data) => data.email === email);
-
-    if (emailValid && password === repassword && password.length >= 8 && !emailChecking) {
-
-      setSignupdata([...signupData, { email: email, password: password, id: signupData.length + 1, previlage: 'User' }])
+      try{
+        await axios.post('https://localhost:7281/api/User/Register',{ userName:username, userEmail: email, password: password });
+        console.log("User registration successful");
+      }
+      catch(err){
+       console.error('Error adding user:', err);
+      }
+      
 
       navigate('/login')
-    } else if (emailChecking) {
-      alert('email is already exist')
     }
+    //  else if (emailChecking) {
+    //   alert('email is already exist')
+    // }
     else if (emailValid === false && email.length === 0) {
       alert('email is not valid')
     }
@@ -45,7 +58,12 @@ const Signup = () => {
   return (
     <div className='login-main'>
       <Form className='signup-form border border-black border-3 ' onSubmit={(e) => e.preventDefault()}>
+      <Form.Group className="mb-3">
 
+<Form.Label>USER NAME</Form.Label>
+<Form.Control onChange={(e) => usernameHandle(e.target.value)} type="text" placeholder="Enter your username" />
+
+</Form.Group>
         <Form.Group className="mb-3">
 
           <Form.Label>EMAIL ADDRESS</Form.Label>

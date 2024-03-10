@@ -14,35 +14,26 @@ import { FaSearch } from "react-icons/fa";
 import { AiOutlineLogout } from "react-icons/ai";
 import Modal from 'react-bootstrap/Modal';
 import { FaUserCircle } from "react-icons/fa";
+import Cookies from 'js-cookie';
 const NavbarMain = () => {
   const navigate = useNavigate();
-  const { login, setLogin, carts, setCarts, signupData, setSignupdata, logindata, setSearchitem, adminloged, setAdminloged, logemail } = useContext(myContext)
+  const { login,setToken, setLogin, carts, setCarts, signupData, setSignupdata, logindata, setSearchitem, adminloged, setAdminloged, logemail } = useContext(myContext)
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const logoutUser = () => {
+    Cookies.remove('accessToken') 
     setLogin(false);
-    const users = signupData.map((data) => {
-      if (data.email === logindata) {
-
-        return { ...data, carts: carts }
-
-      } else {
-        return data;
-      }
-    })
-    setSignupdata(users)
-    setCarts([]);
     setAdminloged(false);
+    setToken("suii");
     handleClose();
   }
-
   return (
     <>
 
       {['md'].map((expand) => (
-        <Navbar key={expand} expand={expand}>
+        <Navbar key={expand} expand={expand} className='bg-white'>
           <Container  >
             <Navbar.Brand className='ls-neg-3' ><Image src={require('../Images/SHOE LOGO.png')} height={'80rem'} onClick={() => navigate('/')} /></Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -62,7 +53,7 @@ const NavbarMain = () => {
                     adminloged ? <Nav.Link className='' onClick={() => navigate('/admin')}>ADMIN</Nav.Link> : <></>
                   }
 
-                  <Nav.Link className='' onClick={() => navigate('/menproducts')}>MEN</Nav.Link>
+                  <Nav.Link  onClick={() => navigate('/menproducts')}>MEN</Nav.Link>
                   <Nav.Link onClick={() => navigate('/womenproducts')}>WOMEN</Nav.Link>
                   <Nav.Link onClick={() => navigate('/collection')} >COLLECTION</Nav.Link>
 
@@ -79,7 +70,7 @@ const NavbarMain = () => {
                   />
                   <Button variant="success " className='my-3 ms-1' onClick={() => navigate('/search')}><FaSearch /></Button>
                 </Form>
-                <Button className='bg-transparent border-0 text-dark ms-3' onClick={() => navigate('/cart')}><FaShoppingCart style={{ fontSize: '30px' }} /></Button>
+                <Button className='bg-transparent border-0 text-dark ms-3' onClick={login?() => navigate('/cart'):() => navigate('/login')}><FaShoppingCart style={{ fontSize: '30px' }} /></Button>
                 {
                   login ? <Button className='bg-transparent ms-2 border-0  my-3 text-dark d-flex flex-column align-items-center justify-content-center p-2'><FaUserCircle style={{ fontSize: '20px' }} /><span style={{ fontSize: '8px' }}>{logemail}</span></Button> :
                     <></>
