@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/WalkInStyle/static/css/main.5f15f66a.css",
-    "main.js": "/WalkInStyle/static/js/main.901c0bff.js",
+    "main.js": "/WalkInStyle/static/js/main.ed0d9d40.js",
     "static/js/787.e4452ded.chunk.js": "/WalkInStyle/static/js/787.e4452ded.chunk.js",
     "static/media/homee.jpg": "/WalkInStyle/static/media/homee.525f946427c559fc38ab.jpg",
     "static/media/Home3.jpg": "/WalkInStyle/static/media/Home3.01c96ec42aad91316591.jpg",
@@ -10,11 +10,11 @@
     "static/media/SHOE LOGO.png": "/WalkInStyle/static/media/SHOE LOGO.cc22c3c31dc4e325561d.png",
     "index.html": "/WalkInStyle/index.html",
     "main.5f15f66a.css.map": "/WalkInStyle/static/css/main.5f15f66a.css.map",
-    "main.901c0bff.js.map": "/WalkInStyle/static/js/main.901c0bff.js.map",
+    "main.ed0d9d40.js.map": "/WalkInStyle/static/js/main.ed0d9d40.js.map",
     "787.e4452ded.chunk.js.map": "/WalkInStyle/static/js/787.e4452ded.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5f15f66a.css",
-    "static/js/main.901c0bff.js"
+    "static/js/main.ed0d9d40.js"
   ]
 }
